@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from models import db, connect_db, Cupcake
 
 app = Flask(__name__)
@@ -17,14 +17,14 @@ def homepage():
 
 @app.route("/api/cupcakes")
 def all_cupcakes():
-    cupcakes = Cupcake.query.all()
-    return render_template("cupcakes.html", cupcakes=cupcakes)
+    list_of_cupcakes = [cupcakes.to_serialize() for cupcakes in Cupcake.query.all()]
+    return jsonify(list_of_cupcakes)
 
-@app.route("/api/cupcakes/<ini:cupcake_id>")
+@app.route("/api/cupcakes/<int:cupcake_id>")
 def spec_cupcake(cupcake_id):
 
     cupcake = Cupcake.query.get_or_404(cupcake_id)
-    return render_template('speciality.html', )
+    return (jsonify(cupcake=cupcake.to_serialize()))
 
 @app.route("/api/cupcakes", methods=['POST'])
 def new_cupcake():
@@ -40,9 +40,9 @@ def new_cupcake():
     db.session.add(cupcake)
     db.session.commit()
 
-    return render_template("create.html", cupcake=cupcake)
+    return (jsonify(cupcake=cupcake.to_serialize()))
 
-@app.route("/api/cupcakes/<ini:cupcake_id>", methods=["PATCH"])
+@app.route("/api/cupcakes/<int:cupcake_id>", methods=["PATCH"])
 def edit_cupcake(cupcake_id):
 
     data = request.json
@@ -55,4 +55,4 @@ def edit_cupcake(cupcake_id):
     db.session.add(cupcake)
     db.session.commit()
 
-    return
+    return jsonify(cupcake=cupcake.to_serialize())
