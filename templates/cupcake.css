@@ -1,5 +1,9 @@
-.Cupcake-img {
+.form-image {
     max-width: 300px;
     max-height: 300px;
     border: solid 1px black;
-  }
+}
+
+#form-rating textarea {
+  border: solid 1px black;
+}
