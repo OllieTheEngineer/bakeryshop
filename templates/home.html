@@ -10,32 +10,36 @@
 <h1>Cupcakes API HW</h1>
 <body>
 <h2>View All Cupcakes</h2>
-<ul id="all_cupcakes"></ul>
+
+<ul id="all_cupcakes">
+</ul>
 
 <h2>Create a new cupcake</h2>
 <form id="cupcake_form">
     <div>
         <label for="form-flavor">Flavor: </label>
-        <input name="flavor" id="form-flavor">
+        <input name="flavor" id="form_flavor">
     </div>
  
     <div>
         <label for="form-size">Size: </label>
-        <input name="size" id="form-size">
+        <input name="size" id="form_size">
     </div>
     
     <div>
         <label for="form-rating">Rating: </label>
-        <input type="number" name="rating" id="form-rating">
+        <input type="number" name="rating" id="form_rating">
     </div>
     
     <div>
         <label for="form-image">Image: </label>
-        <input name="image" id="form-image">
+        <input name="image" id="form_image">
     </div>
 
     <button>Add Cupcake</button>
 </form>
-    
+<script src="https://unpkg.com/jquery"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="/templates/cupcake.js"></script>
 </body>
 </html>

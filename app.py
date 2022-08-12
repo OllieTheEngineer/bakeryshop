@@ -17,14 +17,16 @@ def homepage():
 
 @app.route("/api/cupcakes")
 def all_cupcakes():
-    list_of_cupcakes = [cupcakes.to_serialize() for cupcakes in Cupcake.query.all()]
-    return jsonify(list_of_cupcakes)
+    cupcake_list = [cupcakes.to_serialize() for cupcakes in Cupcake.query.all()]
+    return jsonify(cupcake_list=cupcake_list)
+
 
 @app.route("/api/cupcakes/<int:cupcake_id>")
 def spec_cupcake(cupcake_id):
 
     cupcake = Cupcake.query.get_or_404(cupcake_id)
     return (jsonify(cupcake=cupcake.to_serialize()))
+
 
 @app.route("/api/cupcakes", methods=['POST'])
 def new_cupcake():
