@@ -31,7 +31,7 @@ def spec_cupcake(cupcake_id):
 @app.route("/api/cupcakes", methods=['POST'])
 def new_cupcake():
 
-    data = request.json
+    data = request.form
 
     cupcake = Cupcake(
         flavor=data['flavor'],
@@ -42,7 +42,7 @@ def new_cupcake():
     db.session.add(cupcake)
     db.session.commit()
 
-    return (jsonify(cupcake=cupcake.to_serialize()))
+    return (jsonify(cupcake=cupcake.to_serialize()), 201)
 
 @app.route("/api/cupcakes/<int:cupcake_id>", methods=["PATCH"])
 def edit_cupcake(cupcake_id):
